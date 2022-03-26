@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   // Ecommerce Platform
   platform: 'vtex',
 
@@ -6,7 +6,6 @@ const config = {
   api: {
     storeId: 'storeframework',
     environment: 'vtexcommercestable',
-    hideUnavailableItems: true,
   },
 
   // Default channel
@@ -44,5 +43,3 @@ const config = {
     },
   },
 }
-
-export default config
