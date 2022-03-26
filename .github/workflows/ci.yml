@@ -2,7 +2,7 @@ name: Deploy Vercel
 on: [pull_request]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,22 +20,48 @@ jobs:
 
       - name: Build
         run: |
-          yarn install --frozen-lockfile
+          yarn install --frozen-lockfile --silent
           yarn build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+    steps:
+      - name: start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: ${{ fromJSON('["Production", "Preview"]')[github.ref != 'refs/heads/main']}}
+
+      - uses: actions/checkout@v2
 
       - name: Build
         uses: amondnet/vercel-action@v20
         id: vercel
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-args: '--prod'
+          vercel-args: ${{ fromJSON('["--prod", ""]')[github.ref != 'refs/heads/main']}}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          working-directory: ./
           scope: ${{ secrets.ORG_ID }}
+          working-directory: ./
           alias-domains:  |
             faststore.sanderpaniago.dev
             pr-{{PR_NUMBER}}.sanderpaniago.dev
+
+      - name: update deployment status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
       - run: yarn global add @lhci/cli@0.6.x
 
