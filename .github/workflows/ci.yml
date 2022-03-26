@@ -7,6 +7,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache Dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Build
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+
       - name: Build
         uses: amondnet/vercel-action@v20
         id: vercel
@@ -15,15 +31,14 @@ jobs:
           vercel-args: '--prod'
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
+          working-directory: ./
+          scope: ${{ secrets.ORG_ID }}
           alias-domains:  |
             faststore.sanderpaniago.dev
             pr-{{PR_NUMBER}}.sanderpaniago.dev
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: yarn --silent && yarn global add @lhci/cli@0.6.x
 
-      - run: yarn build
+      - run: yarn global add @lhci/cli@0.6.x
+
       - run: lhci autorun
         env:
           BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
