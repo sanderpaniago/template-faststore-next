@@ -4,7 +4,7 @@ import type { Dispatch } from 'react'
 
 export interface Toast {
   message: string
-  status: 'ERROR' | 'WARNING' | 'INFO'
+  status: 'error' | 'warn' | 'info'
 }
 
 interface InitialState {
@@ -26,12 +26,12 @@ export const uiActions: UIActions = {
   }),
 }
 
-interface UIAction {
-  type: keyof UIActions
-  data?: Toast
+type Action = {
+  type: string
+  data?: unknown
 }
 
-export const uiEffects = (dispatch: Dispatch<UIAction>) => ({
+export const uiEffects = (dispatch: Dispatch<Action>) => ({
   pushToast: (toast: Toast) => dispatch({ type: 'PUSH_TOAST', data: toast }),
   popToast: () => dispatch({ type: 'POP_TOAST' }),
 })
