@@ -44,11 +44,11 @@ jobs:
         id: vercel
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-args: ${{ fromJSON('["--prod", ""]')[github.ref != 'refs/heads/main']}}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
           scope: ${{ secrets.ORG_ID }}
-          working-directory: ./
 
       - name: update deployment status
         uses: bobheadxi/deployments@v1
@@ -60,9 +60,16 @@ jobs:
           env: ${{ steps.deployment.outputs.env }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
+  lighthouse:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+    steps:
       - run: yarn global add @lhci/cli@0.6.x
 
       - run: lhci autorun
         env:
           BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
