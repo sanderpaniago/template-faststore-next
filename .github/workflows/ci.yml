@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: log github items
-        run: echo '${{toJSON(github)}}'
+        run: echo '${{par(github.head_ref)}}'
       - name: Cache Dependencies
         uses: actions/cache@v1
         with:
@@ -34,6 +34,6 @@ jobs:
 
       - run: lhci autorun
         env:
-          BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
+          BASE_SITE_URL: ${{format('{{https://template-faststore-next-git-{0}-sanderpaniago.vercel.app/}}', github.head_ref)}}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
