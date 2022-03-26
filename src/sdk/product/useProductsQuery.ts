@@ -1,4 +1,5 @@
 import { gql } from '@vtex/graphql-utils'
+
 import type {
   ProductsQueryQuery,
   ProductsQueryQueryVariables,

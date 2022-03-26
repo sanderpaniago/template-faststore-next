@@ -1,11 +1,11 @@
-/* eslint-disable prettier/prettier */
 import { useSession } from '@faststore/sdk'
 import { useMemo } from 'react'
+import { gql } from '@vtex/graphql-utils'
+
 import type {
   BrowserProductQueryQuery,
   BrowserProductQueryQueryVariables,
 } from '@generated/graphql'
-import { gql } from '@vtex/graphql-utils'
 
 import { useQuery } from '../graphql/useQuery'
 
@@ -30,7 +30,7 @@ export const useProduct = <T extends BrowserProductQueryQuery>(
     return {
       locator: [
         { key: 'id', value: productID },
-        { key: 'channel', value: '3' },
+        { key: 'channel', value: channel },
       ],
     }
   }, [channel, productID])
