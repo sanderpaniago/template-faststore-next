@@ -49,9 +49,6 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID}}
           scope: ${{ secrets.ORG_ID }}
           working-directory: ./
-          alias-domains:  |
-            faststore.sanderpaniago.dev
-            pr-{{PR_NUMBER}}.sanderpaniago.dev
 
       - name: update deployment status
         uses: bobheadxi/deployments@v1
