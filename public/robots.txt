@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /checkout/*
+Sitemap: https://vtex-base1.tk/sitemap/sitemap-index.xml
+Host: https://vtex-base1.tk

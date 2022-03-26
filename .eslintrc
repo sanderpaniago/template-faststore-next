@@ -1,0 +1,7 @@
+{
+  "extends": ["vtex-react/gatsby", "next/core-web-vitals"],
+  "root": true,
+  "rules": {
+    "jsx-a11y/anchor-is-valid": ["off"] // This is taken care by next.js eslint
+  }
+}
