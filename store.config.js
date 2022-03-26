@@ -26,8 +26,8 @@ module.exports = {
     server: process.env.BASE_SITE_URL || 'http://localhost:3000',
     pages: {
       home: '/',
-      // pdp: '/sleek-metal-pizza-24041857/p',
-      // collection: '/office',
+      pdp: '/',
+      collection: '/',
     },
   },
 
