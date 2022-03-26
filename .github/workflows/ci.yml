@@ -6,7 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      - name: log github items
+        run: echo '${{toJSON(github)}}'
       - name: Cache Dependencies
         uses: actions/cache@v1
         with:
