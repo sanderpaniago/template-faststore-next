@@ -22,9 +22,9 @@ jobs:
         with:
           node-version: '14'
       - run: yarn --silent && yarn global add @lhci/cli@0.6.x
-        env:
-          BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
+
       - run: yarn build
       - run: lhci autorun
         env:
+          BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
