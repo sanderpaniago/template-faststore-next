@@ -1,0 +1,28 @@
+name: Deploy Vercel
+on: [pull_request]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Build
+        uses: amondnet/vercel-action@v20
+        id: vercel
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: '--prod'
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+          alias-domains:  |
+            faststore.sanderpaniago.dev
+            pr-{{PR_NUMBER}}.sanderpaniago.dev
+
+      - run: npm install && npm install -g @lhci/cli@0.6.x
+      - run: npm run build
+        env:
+          BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
+      - run: lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
