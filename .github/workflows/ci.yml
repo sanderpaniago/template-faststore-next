@@ -6,9 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '14'
+
       - name: Build
         uses: amondnet/vercel-action@v20
         id: vercel
@@ -20,7 +18,9 @@ jobs:
           alias-domains:  |
             faststore.sanderpaniago.dev
             pr-{{PR_NUMBER}}.sanderpaniago.dev
-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
       - run: yarn --silent && yarn global add @lhci/cli@0.6.x
         env:
           BASE_SITE_URL: ${{ steps.vercel.outputs.preview-url }}
