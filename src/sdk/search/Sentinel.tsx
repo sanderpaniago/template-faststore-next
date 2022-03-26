@@ -1,13 +1,13 @@
 import { useSearch } from '@faststore/sdk'
 import React, { useEffect, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
+
 import type { ProductSummary_ProductFragment } from '@generated/graphql'
 
 import { useViewItemListEvent } from '../analytics/hooks/useViewItemListEvent'
 
 interface Props {
   page: number
-  pageSize: number
   title: string
   products: ProductSummary_ProductFragment[]
 }
@@ -34,17 +34,12 @@ const replacePagination = (page: number) => {
  * Also, this component's name is kind of curious. Wikipedia calls is Page Break(https://en.wikipedia.org/wiki/Page_break)
  * however all codes I've seen online use Sentinel
  */
-function Sentinel({ page, pageSize, products, title }: Props) {
+function Sentinel({ page, products, title }: Props) {
   const viewedRef = useRef(false)
   const { ref, inView } = useInView()
   const { state: searchState, pages } = useSearch()
 
-  const { sendViewItemListEvent } = useViewItemListEvent({
-    products,
-    title,
-    page,
-    pageSize,
-  })
+  const { sendViewItemListEvent } = useViewItemListEvent({ products, title })
 
   useEffect(() => {
     // Only replace pagination state when infinite scroll

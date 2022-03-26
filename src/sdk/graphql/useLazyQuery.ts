@@ -23,8 +23,6 @@ export const useLazyQuery = <Data, Variables = Record<string, unknown>>(
     )
 
     response.mutate(data, false)
-
-    return data
   }
 
   return [execute, response] as [typeof execute, typeof response]
