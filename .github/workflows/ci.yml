@@ -7,6 +7,32 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Build
+        run: |
+          yarn install --frozen-lockfile --silent
+          yarn build
+
+      - run: yarn global add @lhci/cli@0.8.x
+      - name: Lighthouse
+        run: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
