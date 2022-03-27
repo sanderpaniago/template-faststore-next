@@ -9,6 +9,7 @@ const nextConfig = {
     domains: [
       'storeframework.vtexassets.com',
       'storecomponents.vtexassets.com',
+      'source.unsplash.com',
     ],
     minimumCacheTTL: 3600 * 24 * 365, // 1 year in seconds
   },
