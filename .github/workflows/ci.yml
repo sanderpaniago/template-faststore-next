@@ -26,6 +26,7 @@ jobs:
         run: |
           yarn install --frozen-lockfile --silent
           yarn build
+
   lighthouse:
     needs: build
     runs-on: ubuntu-latest
@@ -34,9 +35,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
-      - run: npm install && npm install -g @lhci/cli@0.8.x
-      - run: npm run build
-      - run: lhci autorun
+      - run: yarn global add @lhci/cli@0.8.x
+      - run: lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
   sonarcloud:
     name: SonarCloud
