@@ -1,3 +1,4 @@
+// eslint-disable global-require
 // eslint-disable-next-line spaced-comment
 /// <reference types="cypress" />
 // ***********************************************************
@@ -9,8 +10,8 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
-const codeCoveragePlugin = require('@cypress/code-coverage/task')
-
+const coverage = require('@cypress/code-coverage/task')
+const coverageBabel = require('@cypress/code-coverage/use-babelrc')
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
@@ -18,9 +19,12 @@ const codeCoveragePlugin = require('@cypress/code-coverage/task')
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  codeCoveragePlugin(on, config)
+  coverage(on, config)
+  // tell Cypress to use .babelrc file
+  // and instrument the specs files
+  // only the extra application files will be instrumented
+  // not the spec files themselves
+  on('file:preprocessor', coverageBabel)
 
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
   return config
 }
