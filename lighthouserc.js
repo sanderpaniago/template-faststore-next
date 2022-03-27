@@ -13,9 +13,7 @@ module.exports = {
       },
     },
     upload: {
-      target: 'lhci',
-      serverBaseUrl: 'https://localhost:9001',
-      token: 'PEGrqNhBYh0iWxlp3iDVt7gRJ8QglaAeHS6VeRTk',
+      target: 'temporary-public-storage',
     },
   },
 }
