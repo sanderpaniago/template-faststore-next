@@ -32,5 +32,6 @@ jobs:
       - run: yarn global add @lhci/cli@0.6.x
       - run: lhci autorun
         env:
+          BASE_SITE_URL: ${{format('{{https://template-faststore-next-git-{0}-sanderpaniago.vercel.app/}}', github.head_ref)}}
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
