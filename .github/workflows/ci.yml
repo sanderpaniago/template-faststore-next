@@ -29,14 +29,8 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v2
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: |
-            ${{format('{{https://template-faststore-next-git-{0}-sanderpaniago.vercel.app/}}', github.head_ref)}}
-          budgetPath: ./budget.json # test performance budgets
-          temporaryPublicStorage: true
+      - run: yarn global add @lhci/cli@0.6.x
+      - run: lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-
 
