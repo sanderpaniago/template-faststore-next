@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
   // Ecommerce Platform
   platform: 'vtex',
 
@@ -6,7 +6,6 @@ const config = {
   api: {
     storeId: 'storeframework',
     environment: 'vtexcommercestable',
-    hideUnavailableItems: true,
   },
 
   // Default channel
@@ -27,8 +26,8 @@ const config = {
     server: process.env.BASE_SITE_URL || 'http://localhost:3000',
     pages: {
       home: '/',
-      pdp: '/sleek-metal-pizza-24041857/p',
-      collection: '/office',
+      pdp: '/',
+      collection: '/',
     },
   },
 
@@ -36,13 +35,11 @@ const config = {
   cypress: {
     pages: {
       home: '/',
-      pdp: '/sleek-metal-pizza-24041857/p',
-      collection: '/office',
-      collection_filtered:
-        '/office/?category-1=office&marca=acer&facets=category-1%2Cmarca',
-      search: '/s?q=orange',
+      // pdp: '/sleek-metal-pizza-24041857/p',
+      // collection: '/office',
+      // collection_filtered:
+      //   '/office/?category-1=office&marca=acer&facets=category-1%2Cmarca',
+      // search: '/s?q=orange',
     },
   },
 }
-
-export default config
