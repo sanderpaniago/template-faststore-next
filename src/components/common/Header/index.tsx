@@ -18,13 +18,13 @@ export function Header() {
         </HStack>
 
         <Stack direction="row">
-          <Button>
+          <Button aria-label="sacola de compras">
             <Icon as={FiShoppingBag} />
           </Button>
-          <Button>
+          <Button aria-label="delivery">
             <Icon as={FiTruck} />
           </Button>
-          <Button>
+          <Button aria-label="search">
             <Icon as={FiSearch} />
           </Button>
         </Stack>
