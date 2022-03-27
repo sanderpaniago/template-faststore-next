@@ -1,8 +1,16 @@
+const { lighthouse: lh } = require('./store.config')
+
 module.exports = {
   ci: {
     collect: {
-      url: [process.env.BASE_SITE_URL],
-      startServerCommand: 'rails server -e production',
+      url: [lh.server],
+      startServerCommand: 'yarn serve',
+    },
+    assert: {
+      assertions: {
+        'categories:performance': ['warn', { minScore: 1 }],
+        'categories:accessibility': ['error', { minScore: 1 }],
+      },
     },
     upload: {
       target: 'temporary-public-storage',

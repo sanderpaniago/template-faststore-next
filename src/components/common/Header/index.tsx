@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Icon, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Container, HStack, Icon, Stack } from '@chakra-ui/react'
 import Link from 'next/link'
 import { FiShoppingBag, FiTruck, FiSearch } from 'react-icons/fi'
 
@@ -7,7 +7,14 @@ import Logo from 'src/components/ui/Logo'
 export function Header() {
   return (
     <Box as="header">
-      <Flex align="center" justify="space-between" maxW={1224} mx="auto" h={75}>
+      <Container
+        d="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        maxW={1240}
+        mx="auto"
+        h={75}
+      >
         <Logo />
 
         <HStack gap={6}>
@@ -18,17 +25,17 @@ export function Header() {
         </HStack>
 
         <Stack direction="row">
-          <Button>
+          <Button aria-label="sacola de compras">
             <Icon as={FiShoppingBag} />
           </Button>
-          <Button>
+          <Button aria-label="delivery">
             <Icon as={FiTruck} />
           </Button>
-          <Button>
+          <Button aria-label="search">
             <Icon as={FiSearch} />
           </Button>
         </Stack>
-      </Flex>
+      </Container>
     </Box>
   )
 }
