@@ -35,8 +35,8 @@ export function ProductSummary({ product }: ProductSummaryProps) {
         <Image
           src={product.image[0].url}
           alt={product.image[0].alternateName}
-          height={200}
-          width={200}
+          height={150}
+          width={150}
           layout="responsive"
           objectFit="cover"
           style={{
@@ -47,7 +47,12 @@ export function ProductSummary({ product }: ProductSummaryProps) {
           {product.isVariantOf.name}
         </Text>
         <Flex justify="space-between" align="center" my={1}>
-          <Text color="gray.300" textDecor="line-through" fontSize={12}>
+          <Text
+            color="gray.500"
+            fontWeight={500}
+            textDecor="line-through"
+            fontSize={12}
+          >
             {listPrice}
           </Text>
           <Text
