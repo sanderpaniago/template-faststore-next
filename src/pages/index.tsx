@@ -22,13 +22,13 @@ const {
 
 const sliders = [
   {
-    image: 'https://source.unsplash.com/1600x900/?moda',
+    image: 'https://source.unsplash.com/1240x600/?moda',
   },
   {
-    image: 'https://source.unsplash.com/1600x900/?moda',
+    image: 'https://source.unsplash.com/1240x600/?moda',
   },
   {
-    image: 'https://source.unsplash.com/1600x900/?moda',
+    image: 'https://source.unsplash.com/1240x600/?moda',
   },
 ]
 

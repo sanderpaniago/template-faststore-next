@@ -35,8 +35,8 @@ export function ProductSummary({ product }: ProductSummaryProps) {
         <Image
           src={product.image[0].url}
           alt={product.image[0].alternateName}
-          height={300}
-          width={300}
+          height={250}
+          width={250}
           layout="responsive"
           objectFit="cover"
           style={{
