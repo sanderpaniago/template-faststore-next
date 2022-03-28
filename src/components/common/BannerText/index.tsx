@@ -8,7 +8,7 @@ type BannerTextProps = {
   actionLabel: string
 }
 
-export function BannerText({
+export default function BannerText({
   title,
   caption,
   actionPath,

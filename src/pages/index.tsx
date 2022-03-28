@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { NextSeo } from 'next-seo'
 import { Container } from '@chakra-ui/react'
 import type { GetStaticProps } from 'next'
@@ -11,10 +12,16 @@ import type {
 import { SliderLayout } from 'src/components/common/SliderLayout'
 import { useSiteUrl } from 'src/sdk/useSiteUrl'
 import { execute } from 'src/server'
-import { ProductShelf } from 'src/components/Product/Shelf'
-import { BannerText } from 'src/components/common/BannerText'
 
 import storeConfig from '../../store.config'
+
+const ProductShelf = dynamic(() =>
+  import('src/components/Product/Shelf')
+    .then((mod) => mod.ProductShelf)
+    .finally()
+)
+
+const BannerText = dynamic(() => import('src/components/common/BannerText'))
 
 const {
   site: { title },
