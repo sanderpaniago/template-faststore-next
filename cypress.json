@@ -4,5 +4,10 @@
   "defaultCommandTimeout": 20000,
   "video": true,
   "retries": 2,
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "env": {
+    "codeCoverage": {
+      "url": "http://localhost:3000/__coverage__"
+    }
+  }
 }

@@ -1,10 +1,20 @@
-import { Box, Button, Container, HStack, Icon, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Icon,
+  Stack,
+  useBreakpointValue,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { FiShoppingBag, FiTruck, FiSearch } from 'react-icons/fi'
 
 import Logo from 'src/components/ui/Logo'
 
 export function Header() {
+  const isMobile = useBreakpointValue({ base: false, md: true })
+
   return (
     <Box as="header">
       <Container
@@ -17,12 +27,14 @@ export function Header() {
       >
         <Logo />
 
-        <HStack gap={6}>
-          <Link href="#">Collections</Link>
-          <Link href="#">Brands</Link>
-          <Link href="#">News</Link>
-          <Link href="#">Sales</Link>
-        </HStack>
+        {isMobile && (
+          <HStack gap={6}>
+            <Link href="#">Collections</Link>
+            <Link href="#">Brands</Link>
+            <Link href="#">News</Link>
+            <Link href="#">Sales</Link>
+          </HStack>
+        )}
 
         <Stack direction="row">
           <Button aria-label="sacola de compras">

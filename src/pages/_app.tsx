@@ -35,7 +35,14 @@ function App({ Component, pageProps }: AppProps) {
           actions={uiActions}
           effects={uiEffects}
         >
-          <SessionProvider initialState={{ channel, locale }}>
+          <SessionProvider
+            initialState={{
+              channel,
+              locale,
+              country: 'BR',
+              currency: { code: 'BRL', symbol: 'R$' },
+            }}
+          >
             <CartProvider<CartItem>
               mode="optimistic"
               onValidateCart={validateCart}
