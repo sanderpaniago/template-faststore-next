@@ -5,7 +5,7 @@ export default function Page() {
     <>
       <NextSeo noindex nofollow />
 
-      <h1>TODO</h1>
+      <h1>testing</h1>
     </>
   )
 }
